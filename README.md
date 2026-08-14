@@ -1,6 +1,7 @@
 # exercise_diary
 
-실제 작동하는 사이트 : <exercise-diary.rladydgnj.workers.dev>
+[운동 일지 사이트 바로가기](https://exercise-diary.rladydgnj.workers.dev)
+
 
 
 

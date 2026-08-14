@@ -1,20 +1,24 @@
-# exercise_diary
+# Exercise_diary
 
 [운동 일지 사이트 바로가기](https://exercise-diary.rladydgnj.workers.dev)
 
 
 
 
-
 ## 스크린샷
 
-<img width="1067" height="827" alt="스크린샷 2026-08-14 오후 1 28 33" src="https://github.com/user-attachments/assets/81571c6b-2a05-45d8-a252-5c2491b398c9" />
+<img width="1067" height="829" alt="스크린샷 2026-08-14 오후 3 58 34" src="https://github.com/user-attachments/assets/6e5c4f30-ecd3-44a8-8fae-7e533c427b0b" />
 
-<img width="1067" height="827" alt="스크린샷 2026-08-14 오후 2 42 10" src="https://github.com/user-attachments/assets/60ba8a8f-39fa-4949-a643-d97a7ebc0506" />
+<img width="1067" height="829" alt="스크린샷 2026-08-14 오후 3 58 39" src="https://github.com/user-attachments/assets/d17f3152-e956-4014-94f7-1bd6c83c61fe" />
 
-<img width="1067" height="806" alt="스크린샷 2026-08-14 오후 2 44 15" src="https://github.com/user-attachments/assets/38c7d107-9360-4c2d-a02b-9f0586985139" />
+<img width="1067" height="829" alt="스크린샷 2026-08-14 오후 3 58 46" src="https://github.com/user-attachments/assets/d3d3fe26-0108-4af6-858c-bb0abb05e34c" />
 
-<img width="1067" height="806" alt="스크린샷 2026-08-14 오후 2 44 26" src="https://github.com/user-attachments/assets/0795752e-0603-4b07-a956-af1a6b41c99f" />
+<img width="1067" height="756" alt="스크린샷 2026-08-14 오후 3 58 57" src="https://github.com/user-attachments/assets/02dedb9d-c1ee-425a-b4ef-0fda31dd371a" />
+
+
+
+
+
 
 ## 핵심 구현 내용
 

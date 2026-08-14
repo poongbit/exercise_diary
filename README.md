@@ -1,5 +1,10 @@
 # exercise_diary
 
+실제 작동하는 사이트 : exercise-diary.rladydgnj.workers.dev
+
+
+
+
 ## 스크린샷
 
 <img width="1067" height="827" alt="스크린샷 2026-08-14 오후 1 28 33" src="https://github.com/user-attachments/assets/81571c6b-2a05-45d8-a252-5c2491b398c9" />

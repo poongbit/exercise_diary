@@ -150,6 +150,22 @@ button {
   border-bottom-color: #ff4d3d;
 }
 
+.메뉴등장 {
+  animation: 메뉴나타나기 0.4s ease;
+}
+
+@keyframes 메뉴나타나기 {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 검색과 필터 영역이에요. */
 .도구영역 {
   margin: 26px 0;

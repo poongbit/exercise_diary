@@ -1,6 +1,6 @@
 # exercise_diary
 
-실제 작동하는 사이트 : exercise-diary.rladydgnj.workers.dev
+실제 작동하는 사이트 : <exercise-diary.rladydgnj.workers.dev>
 
 
 

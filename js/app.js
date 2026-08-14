@@ -9,25 +9,33 @@
       let 날씨를불러왔는지 = false;
       let 현재날씨 = null;
 
-      /* localStorage에서 운동 기록을 불러와요. */
+      /* 통계에서 현재 보고 있는 연도와 월이에요. 예: 2026-08 */
+      let 통계기준월 = 오늘날짜가져오기().slice(0, 7);
 
-/* localStorage에서 운동 기록을 불러와요. */
+      /* localStorage에서 운동 기록을 불러와요. */
       function 처음화면준비하기() {
         const 저장된운동 = localStorage.getItem("용휘운동일지");
 
         if (저장된운동 !== null) {
           운동일지 = JSON.parse(저장된운동);
+
+          /* 예전 상체 기록은 새 분류에 맞게 가슴으로 바꿔 줘요. */
+          운동일지.map(function (하루) {
+            하루.운동목록.map(function (운동) {
+              if (운동.부위 === "상체") 운동.부위 = "가슴";
+            });
+          });
         }
 
         운동목록그리기(운동일지);
       }
 
-/* 운동 기록을 localStorage에 저장해요. */
+      /* 운동 기록을 localStorage에 저장해요. */
       function 운동저장하기() {
         localStorage.setItem("용휘운동일지", JSON.stringify(운동일지));
       }
 
-/* 날짜를 YYYY-MM-DD 모양으로 만들어요. */
+      /* 날짜를 YYYY-MM-DD 모양으로 만들어요. */
       function 오늘날짜가져오기() {
         const 오늘 = new Date();
         const 년 = 오늘.getFullYear();
@@ -36,7 +44,7 @@
         return 년 + "-" + 월 + "-" + 일;
       }
 
-/* 탭을 누르면 선택한 메뉴만 보여 줘요. */
+      /* 탭을 누르면 선택한 메뉴만 보여 줘요. */
       function 메뉴이동(메뉴이름) {
         const 기록메뉴 = document.getElementById("기록메뉴");
         const 통계메뉴 = document.getElementById("통계메뉴");
@@ -53,19 +61,22 @@
         document.getElementById("오늘탭").className =
           메뉴이름 === "오늘" ? "탭버튼 선택된탭" : "탭버튼";
 
-        if (메뉴이름 === "통계") 통계그리기();
+        if (메뉴이름 === "통계") {
+          통계그리기();
+        }
 
         if (메뉴이름 === "오늘" && 날씨를불러왔는지 === false) {
           현재위치가져오기();
         }
       }
 
-/* 다크모드는 body 클래스만 바꿔요. 새로고침하면 원래대로 돌아와요. */
+      /* 다크모드는 body 클래스만 바꿔요. 새로고침하면 원래대로 돌아와요. */
       function 다크모드바꾸기() {
         document.body.classList.toggle("다크모드");
       }
 
-window.addEventListener("keydown", function (event) {
+/* ESC 키를 누르면 열려 있는 모달을 닫아요. */
+      window.addEventListener("keydown", function (event) {
         if (event.key !== "Escape") return;
 
         if (document.getElementById("삭제확인모달").style.display === "flex") {

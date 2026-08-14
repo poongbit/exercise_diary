@@ -11,7 +11,7 @@
         return 설명;
       }
 
-/* 하루 운동 기록을 카드 HTML로 바꿔요. */
+      /* 하루 운동 기록을 카드 HTML로 바꿔요. */
       function 운동카드만들기(하루) {
         let 종목HTML = "";
 
@@ -45,7 +45,7 @@
             `;
       }
 
-/* 검색과 부위 필터를 적용한 뒤 카드를 화면에 그려요. */
+      /* 검색과 부위 필터를 적용한 뒤 카드를 화면에 그려요. */
       function 운동목록그리기(목록) {
         let 카드HTML = "";
 
@@ -64,23 +64,7 @@
         document.getElementById("운동목록").innerHTML = 카드HTML;
       }
 
-/* 검색어와 부위 조건에 맞는 기록만 찾아요. */
-      function 운동검색하기() {
-        const 검색결과 = 운동일지.filter(function (하루) {
-          const 조건에맞는운동 = 하루.운동목록.filter(function (운동) {
-            const 부위가맞는지 =
-              선택한부위 === "전체" || 운동.부위 === 선택한부위;
-            const 검색어가있는지 = 운동.종목.indexOf(입력한검색어) !== -1;
-            return 부위가맞는지 && 검색어가있는지;
-          });
-
-          return 조건에맞는운동.length > 0;
-        });
-
-        운동목록그리기(검색결과);
-      }
-
-/* 검색어와 부위 조건에 맞는 기록만 찾아요. */
+      /* 검색어와 부위 조건에 맞는 기록만 찾아요. */
       function 운동검색하기() {
         const 검색결과 = 운동일지.filter(function (하루) {
           const 조건에맞는운동 = 하루.운동목록.filter(function (운동) {
@@ -101,7 +85,7 @@
         운동검색하기();
       }
 
-/* 글자를 계속 입력할 때 너무 자주 검색하지 않도록 500ms 기다려요. */
+      /* 글자를 계속 입력할 때 너무 자주 검색하지 않도록 500ms 기다려요. */
       function 검색어바꾸기(event) {
         const 검색어 = event.target.value;
         clearTimeout(검색타이머);
@@ -117,24 +101,25 @@
         const 유형 = document.getElementById("유형입력").value;
         const 웨이트입력 = document.getElementById("웨이트입력");
         const 유산소입력 = document.getElementById("유산소입력");
-        const 부위입력 = document.getElementById("부위입력");
+        const 부위영역 = document.getElementById("부위영역");
 
         if (유형 === "유산소") {
           웨이트입력.style.display = "none";
           유산소입력.style.display = "grid";
-          부위입력.value = "유산소";
+          부위영역.style.display = "none";
         } else {
           웨이트입력.style.display = "grid";
           유산소입력.style.display = "none";
-          if (부위입력.value === "유산소") 부위입력.value = "상체";
+          부위영역.style.display = "block";
         }
       }
 
-/* 입력한 운동 한 종목을 배열에 추가해요. */
+      /* 입력한 운동 한 종목을 배열에 추가해요. */
       function 운동등록하기() {
         const 날짜 = document.getElementById("날짜입력").value;
         const 유형 = document.getElementById("유형입력").value;
-        const 부위 = document.getElementById("부위입력").value;
+        let 부위 = document.getElementById("부위입력").value;
+        if (유형 === "유산소") 부위 = "유산소";
         const 종목 = document.getElementById("종목입력").value.trim();
         const 메모 = document.getElementById("메모입력").value.trim();
 
@@ -179,7 +164,7 @@
         완료모달열기();
       }
 
-/* 등록 후 입력창을 비워 줘요. */
+      /* 등록 후 입력창을 비워 줘요. */
       function 입력값초기화하기() {
         document.getElementById("종목입력").value = "";
         document.getElementById("메모입력").value = "";
@@ -190,18 +175,7 @@
         document.getElementById("거리입력").value = "";
       }
 
-/* 삭제 버튼을 누르면 삭제 확인 모달을 먼저 보여 줘요. */
-      function 하루삭제하기(번호) {
-        삭제종류 = "하루";
-        삭제하루번호 = 번호;
-        삭제종목순서 = -1;
-        document.getElementById("삭제문장").innerText =
-          "이 날짜의 운동 기록을 모두 삭제할까요?";
-        document.getElementById("삭제확인모달").style.display = "flex";
-        document.body.style.overflow = "hidden";
-      }
-
-/* 삭제 버튼을 누르면 삭제 확인 모달을 먼저 보여 줘요. */
+      /* 삭제 버튼을 누르면 삭제 확인 모달을 먼저 보여 줘요. */
       function 하루삭제하기(번호) {
         삭제종류 = "하루";
         삭제하루번호 = 번호;
@@ -222,7 +196,12 @@
         document.body.style.overflow = "hidden";
       }
 
-/* 실제 삭제는 확인 버튼을 눌렀을 때 실행해요. */
+      function 삭제모달닫기() {
+        document.getElementById("삭제확인모달").style.display = "none";
+        document.body.style.overflow = "";
+      }
+
+      /* 실제 삭제는 확인 버튼을 눌렀을 때 실행해요. */
       function 삭제확인하기() {
         if (삭제종류 === "하루") {
           운동일지 = 운동일지.filter(function (하루) {

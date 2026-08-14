@@ -22,7 +22,7 @@
         );
       }
 
-/* Open-Meteo 날씨 API를 fetch로 불러와요. */
+      /* Open-Meteo 날씨 API를 fetch로 불러와요. */
       function 날씨불러오기(위도, 경도, 위치이름) {
         const 날씨주소 =
           "https://api.open-meteo.com/v1/forecast?latitude=" +
@@ -47,73 +47,7 @@
           });
       }
 
-/* 같은 위치의 공기질 정보도 Open-Meteo에서 불러와요. */
-      function 공기질불러오기(위도, 경도) {
-        const 공기주소 =
-          "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" +
-          위도 +
-          "&longitude=" +
-          경도 +
-          "&current=pm2_5,pm10,european_aqi";
-
-        fetch(공기주소)
-          .then(function (결과) {
-            return 결과.json();
-          })
-          .then(function (공기결과) {
-            현재날씨.pm25 = 공기결과.current.pm2_5;
-            현재날씨.pm10 = 공기결과.current.pm10;
-            현재날씨.aqi = 공기결과.current.european_aqi;
-            날씨를불러왔는지 = true;
-            공기질화면그리기();
-            추천그리기();
-          })
-          .catch(function () {
-            날씨를불러왔는지 = true;
-            추천그리기();
-          });
-      }
-
-/* 같은 위치의 공기질 정보도 Open-Meteo에서 불러와요. */
-      function 공기질불러오기(위도, 경도) {
-        const 공기주소 =
-          "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" +
-          위도 +
-          "&longitude=" +
-          경도 +
-          "&current=pm2_5,pm10,european_aqi";
-
-        fetch(공기주소)
-          .then(function (결과) {
-            return 결과.json();
-          })
-          .then(function (공기결과) {
-            현재날씨.pm25 = 공기결과.current.pm2_5;
-            현재날씨.pm10 = 공기결과.current.pm10;
-            현재날씨.aqi = 공기결과.current.european_aqi;
-            날씨를불러왔는지 = true;
-            공기질화면그리기();
-            추천그리기();
-          })
-          .catch(function () {
-            날씨를불러왔는지 = true;
-            추천그리기();
-          });
-      }
-
-      function 날씨화면그리기(위치이름) {
-        document.getElementById("날씨상태").innerText = 위치이름;
-        document.getElementById("기온").innerText =
-          현재날씨.temperature_2m + "℃";
-        document.getElementById("체감온도").innerText =
-          현재날씨.apparent_temperature + "℃";
-        document.getElementById("습도").innerText =
-          현재날씨.relative_humidity_2m + "%";
-        document.getElementById("강수").innerText =
-          현재날씨.precipitation + "mm";
-      }
-
-/* 같은 위치의 공기질 정보도 Open-Meteo에서 불러와요. */
+      /* 같은 위치의 공기질 정보도 Open-Meteo에서 불러와요. */
       function 공기질불러오기(위도, 경도) {
         const 공기주소 =
           "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" +
@@ -157,11 +91,17 @@
         document.getElementById("AQI").innerText = 현재날씨.aqi;
       }
 
-/* 최근 운동 부위와 날씨를 보고 아주 간단하게 오늘 운동을 추천해요. */
+      /* 최근 운동 부위와 날씨를 보고 아주 간단하게 오늘 운동을 추천해요. */
       function 추천그리기() {
-        let 상체 = 0;
-        let 하체 = 0;
-        let 코어 = 0;
+        let 부위횟수 = {
+          가슴: 0,
+          등: 0,
+          어깨: 0,
+          이두: 0,
+          삼두: 0,
+          하체: 0,
+          코어: 0,
+        };
 
         const 최근기록 = 운동일지
           .slice()
@@ -172,15 +112,21 @@
 
         최근기록.map(function (하루) {
           하루.운동목록.map(function (운동) {
-            if (운동.부위 === "상체") 상체 = 상체 + 1;
-            if (운동.부위 === "하체") 하체 = 하체 + 1;
-            if (운동.부위 === "코어") 코어 = 코어 + 1;
+            if (부위횟수[운동.부위] !== undefined) {
+              부위횟수[운동.부위] = 부위횟수[운동.부위] + 1;
+            }
           });
         });
 
-        let 추천부위 = "상체";
-        if (하체 <= 상체 && 하체 <= 코어) 추천부위 = "하체";
-        if (코어 <= 상체 && 코어 <= 하체) 추천부위 = "코어";
+        let 추천부위 = "가슴";
+        let 가장적은횟수 = 부위횟수.가슴;
+
+        Object.keys(부위횟수).map(function (부위) {
+          if (부위횟수[부위] < 가장적은횟수) {
+            가장적은횟수 = 부위횟수[부위];
+            추천부위 = 부위;
+          }
+        });
 
         let 장소추천 = "가벼운 야외 유산소를 함께 해도 좋습니다.";
 
@@ -192,7 +138,7 @@
 
         if (운동일지.length === 0) {
           document.getElementById("추천내용").innerText =
-            "아직 운동 기록이 없습니다. 오늘은 상체, 하체, 코어 중 한 부위를 가볍게 시작해 보세요. " +
+            "아직 운동 기록이 없습니다. 가슴, 등, 어깨, 이두, 삼두, 하체, 코어 중 한 부위를 가볍게 시작해 보세요. " +
             장소추천;
         } else {
           document.getElementById("추천내용").innerText =

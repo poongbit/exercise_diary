@@ -46,7 +46,11 @@
         <div class="도구영역">
           <select class="선택창" onchange="부위바꾸기(event)">
             <option value="전체">전체 부위</option>
-            <option value="상체">상체</option>
+            <option value="가슴">가슴</option>
+            <option value="등">등</option>
+            <option value="어깨">어깨</option>
+            <option value="이두">이두</option>
+            <option value="삼두">삼두</option>
             <option value="하체">하체</option>
             <option value="코어">코어</option>
             <option value="유산소">유산소</option>
@@ -65,7 +69,14 @@
 
       <!-- 두 번째 탭: 운동 통계 -->
       <div class="통계메뉴" id="통계메뉴">
-        <h2 class="메뉴제목">이번 달 운동 통계</h2>
+        <h2 class="메뉴제목">운동 통계</h2>
+
+        <!-- 이전 달 / 다음 달 통계를 볼 수 있어요. -->
+        <div class="월이동영역">
+          <button class="월이동버튼" onclick="월바꾸기(-1)">◀</button>
+          <div class="월제목" id="월제목"></div>
+          <button class="월이동버튼" onclick="월바꾸기(1)">▶</button>
+        </div>
 
         <div class="통계카드목록">
           <div class="통계카드">
@@ -91,13 +102,44 @@
 
           <div class="부위한줄">
             <div class="부위이름">
-              <span>상체</span><span id="상체퍼센트">0%</span>
+              <span>가슴</span><span id="가슴퍼센트">0%</span>
             </div>
             <div class="막대배경">
-              <div class="막대" id="상체막대" style="width: 0%"></div>
+              <div class="막대" id="가슴막대" style="width: 0%"></div>
             </div>
           </div>
-
+          <div class="부위한줄">
+            <div class="부위이름">
+              <span>등</span><span id="등퍼센트">0%</span>
+            </div>
+            <div class="막대배경">
+              <div class="막대" id="등막대" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="부위한줄">
+            <div class="부위이름">
+              <span>어깨</span><span id="어깨퍼센트">0%</span>
+            </div>
+            <div class="막대배경">
+              <div class="막대" id="어깨막대" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="부위한줄">
+            <div class="부위이름">
+              <span>이두</span><span id="이두퍼센트">0%</span>
+            </div>
+            <div class="막대배경">
+              <div class="막대" id="이두막대" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="부위한줄">
+            <div class="부위이름">
+              <span>삼두</span><span id="삼두퍼센트">0%</span>
+            </div>
+            <div class="막대배경">
+              <div class="막대" id="삼두막대" style="width: 0%"></div>
+            </div>
+          </div>
           <div class="부위한줄">
             <div class="부위이름">
               <span>하체</span><span id="하체퍼센트">0%</span>
@@ -106,7 +148,6 @@
               <div class="막대" id="하체막대" style="width: 0%"></div>
             </div>
           </div>
-
           <div class="부위한줄">
             <div class="부위이름">
               <span>코어</span><span id="코어퍼센트">0%</span>
@@ -115,7 +156,6 @@
               <div class="막대" id="코어막대" style="width: 0%"></div>
             </div>
           </div>
-
           <div class="부위한줄">
             <div class="부위이름">
               <span>유산소</span><span id="유산소퍼센트">0%</span>
@@ -246,13 +286,16 @@
           </div>
         </div>
 
-        <div class="입력묶음">
+        <div class="입력묶음" id="부위영역">
           <div class="입력라벨">운동 부위</div>
           <select class="모달선택창" id="부위입력">
-            <option value="상체">상체</option>
+            <option value="가슴">가슴</option>
+            <option value="등">등</option>
+            <option value="어깨">어깨</option>
+            <option value="이두">이두</option>
+            <option value="삼두">삼두</option>
             <option value="하체">하체</option>
             <option value="코어">코어</option>
-            <option value="유산소">유산소</option>
           </select>
         </div>
 
@@ -366,7 +409,6 @@
         </div>
       </div>
     </div>
-
     <script src="./js/app.js"></script>
     <script src="./js/workout.js"></script>
     <script src="./js/modal.js"></script>
